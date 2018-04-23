@@ -17,8 +17,6 @@ node.next.next.next.next.next.next = Node(9)
 
 def findMthElement(node,m):
 
-
-
     # Edge Case
     if node is None:
         return
@@ -33,6 +31,21 @@ def findMthElement(node,m):
     #               This is O(n) + O(n) = O(2n) approach, might be inefficient for really long linkedList
     # We can have better approach
 
-    # Approach 2 =>
+    # Approach 2 => Have 2 pointers. One following the other m nodes behind.
+    #
 
+    while curr:
+        if counter == m:
+            prev = head
+        if counter > m:
+            prev = prev.next
+        curr = curr.next
+        counter += 1
+
+    if not prev:
+        return None
+
+    return prev
+
+print(findMthElement(node,7))
 
