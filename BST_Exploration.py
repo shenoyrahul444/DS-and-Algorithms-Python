@@ -30,14 +30,20 @@ class BST:
 
     def _addNode(self,root,val):                 # <-------------- Recursive traversal
         if root == None:
-            root = Node(val)
-            return root
+            return Node(val)
+
         if val > root.value:
-            root.rightChild = self._addNode(root.rightChild,val)
-            return root
+            if not root.rightChild:
+                root.rightChild = self._addNode(root.rightChild,val)
+            else:
+                self._addNode(root.rightChild, val)
+
         elif val < root.value:
-            root.leftChild = self._addNode(root.leftChild,val)
-            return root
+            if not root.leftChild:
+                root.leftChild = self._addNode(root.leftChild,val)
+            else:
+                self._addNode(root.leftChild, val)
+
 
     def printBST(self):
         if not self.root:
@@ -50,6 +56,16 @@ class BST:
             print(str(root.value))
             self._printBST(root.rightChild)
 
+    #Finding height of the Tree (1  + Maximum of the Length of the tallest subtree)
+    def getHeight(self):
+        if self.root:
+            return self._getHeight(self.root)
+
+    def _getHeight(self,node):
+        if node == None:
+            return 0
+        length = 1 + max(self._getHeight(node.leftChild) , self._getHeight(node.rightChild))
+        return length
 
 tree = BST()
 tree.addNode(10)
@@ -64,4 +80,6 @@ tree.addNode(40)
 # while curr:
 #     print(str(curr.value))
 #     curr = curr.rightChild
-tree.printBST()
+# tree.printBST()
+# print(tree.root)
+print(str(tree.getHeight()))
