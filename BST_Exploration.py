@@ -30,12 +30,13 @@ class BST:
 
     def _addNode(self,root,val):                 # <-------------- Recursive traversal
         if root == None:
-            return Node(val)
+            root = Node(val)
+            return root
         if val > root.value:
             root.rightChild = self._addNode(root.rightChild,val)
             return root
         elif val < root.value:
-            root.rightChild = self._addNode(root.leftChild,val)
+            root.leftChild = self._addNode(root.leftChild,val)
             return root
 
     def printBST(self):
@@ -46,11 +47,15 @@ class BST:
     def _printBST(self,root):                   # <-------------- Recursive traversal
         if root:
             self._printBST(root.leftChild)
-            self._printBST(root.rightChild)
             print(str(root.value))
+            self._printBST(root.rightChild)
+
 
 tree = BST()
 tree.addNode(10)
+tree.addNode(9)
+tree.addNode(3)
+tree.addNode(4)
 tree.addNode(20)
 tree.addNode(30)
 tree.addNode(40)
