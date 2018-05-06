@@ -30,8 +30,19 @@ class Graph:
                     queue.append(vertice)
                     visited.add(vertice)
 
+    def DFS(self,source):
 
+        visited = set()
+        self.DFS_Util(source,visited)
 
+    def DFS_Util(self,source,visited):
+
+        visited.add(source)
+        print(source)
+
+        for node in self.graph[source]:
+            if node not in visited:
+                self.DFS_Util(node,visited)
 
 
     def __str__(self):
@@ -49,5 +60,9 @@ g.addEdge(1,2)
 g.addEdge(3,3)
 g.addEdge(0,2)
 g.addEdge(0,1)
-# print(g)
+print("The graph is: ",g)
+print("\nBFS")
 g.BFS(2)
+
+print("\nDFS")
+g.DFS(2)
